@@ -7,12 +7,25 @@ int main(void)
 {
 
 void sigint_handler(int sig);
+void sigtstp_handler(int tstp);
+void sigquit_handler(int quit);
 char s[200];
 
 if(signal(SIGINT,sigint_handler)==SIG_ERR){
 perror("signal");
 exit(1);
 
+}
+
+   else if(signal(SIGTSTP,sigtstp_handler)==SIG_ERR){
+   perror("signal");
+   exit(1);
+
+}
+
+   else if(signal(SIGQUIT,sigquit_handler)==SIG_ERR){
+   perror("signal");
+   exit(1);
 }
 
 printf("Enter a string:\n");
@@ -29,11 +42,20 @@ return 0;
 }
 
 void sigint_handler(int sig)
-
 {
-
-  printf("Jangan Kacau saya!\n");
+ printf("This is a special signal handler for sigint\n");
 }
+void sigtstp_handler(int tstp)
+{
+  printf("This is a special signal handler for sigtstp\n");
+}
+
+void sigquit_handler(int sig)
+{
+  printf("This is a special singnal handler for sigquit\n");
+}
+
+
 
 
 
